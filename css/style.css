@@ -1,0 +1,128 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: futura-pt-condensed, sans-serif;
+}
+
+.container {
+  /* Why is this not working? */
+  position: relative;
+}
+
+#container{
+  display: flex;
+  justify-content: center;
+}
+
+.background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: -1;
+  background-color: #1B4D92;
+  height: 100vh;
+}
+
+#canvas-container {
+  position: relative;
+  top: 20px;
+  z-index: 9999;
+  border: 8px solid white;
+  padding: 0px;
+  height: 480px;
+  width: 640px;
+}
+
+#scroll-container {
+  overflow: hidden;
+}
+
+#scroll-text {
+  color: #2B77AF;
+  font-size: 160px;
+  white-space: nowrap;
+
+  /* animation properties */
+  -moz-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+
+  -moz-animation: my-animation 60s linear infinite;
+  -webkit-animation: my-animation 60s linear infinite;
+  animation: my-animation 60s linear infinite;
+}
+
+/* for Firefox */
+@-moz-keyframes my-animation {
+  from {
+    -moz-transform: translateX(100%);
+  }
+
+  to {
+    -moz-transform: translateX(-100%);
+  }
+}
+
+/* for Chrome */
+@-webkit-keyframes my-animation {
+  from {
+    -webkit-transform: translateX(100%);
+  }
+
+  to {
+    -webkit-transform: translateX(-100%);
+  }
+}
+
+@keyframes my-animation {
+  from {
+    -moz-transform: translateX(100%);
+    -webkit-transform: translateX(100%);
+    transform: translateX(100%);
+  }
+
+  to {
+    -moz-transform: translateX(-100%);
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%);
+  }
+
+/* Futura PT Bold */
+font-family: futura-pt-bold,
+sans-serif;
+font-weight: 700;
+font-style: normal;
+
+
+/* Futura PT Bold Oblique */
+font-family: futura-pt-bold,
+sans-serif;
+font-weight: 700;
+font-style: italic;
+
+
+/* Futura PT Cond Bold */
+font-family: futura-pt-condensed,
+sans-serif;
+font-weight: 700;
+font-style: normal;
+
+
+/* Futura PT Cond Extra Bold */
+font-family: futura-pt-condensed,
+sans-serif;
+font-weight: 800;
+font-style: normal;
+
+/* Nimbus Sans Bold */
+font-family: nimbus-sans, sans-serif;
+font-weight: 700;
+font-style: normal;
+
+
+/* Nimbus Sans Cond L Bold */
+font-family: nimbus-sans-condensed, sans-serif;
+font-weight: 700;
+font-style: normal;

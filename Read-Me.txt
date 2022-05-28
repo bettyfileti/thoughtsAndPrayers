@@ -1,0 +1,11 @@
+Moon's excellent start file:
+https://github.com/MOQN/IMALowRes-Make-Art-with-AI/tree/main/1.6_BlazePose_tensorflow/BlazePose-01-basics
+
+Smoothing out noise:
+https://javascript.plainenglish.io/simple-smoothing-for-posenet-keypoints-cd1bc57f5872
+
+Scrolling text:
+https://blog.hubspot.com/website/scrolling-text-css
+
+Setting up text as background:
+https://www.geeksforgeeks.org/how-to-use-text-as-background-using-css/
