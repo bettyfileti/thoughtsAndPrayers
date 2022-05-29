@@ -8,7 +8,12 @@ let recentLeftXs = [];
 let recentRightXs = [];
 let recentLeftYs = [];
 let recentRightYs = [];
+let recentLeftEyeXs = [];
+let recentLeftEyeYs = [];
+let recentRightEyeXs = [];
+let recentRightEyeYs = [];
 let numXs = 5; //this is the number of frames to average
+
 let weArePraying = false;
 let headlines = [];
 let futura = "futura-pt-bold";
@@ -40,41 +45,67 @@ function draw() {
     let leftPinky = pose.keypoints[17];
     let rightPinky = pose.keypoints[18];
 
-    displayData(leftPinky);
-    displayData(rightPinky);
-    for (let p of pose.keypoints) {
+    let eyeDistance;
+    let leftEyeInner = pose.keypoints[1];
+    let rightEyeInner = pose.keypoints[4]
 
-      if (leftPinky.score > .10 && rightPinky.score > .10) {
-        if (leftPinky.y >= rightPinky.y + 150 || leftPinky.y <= rightPinky.y - 150){
-          // console.log("pinky fingers are too far apart");
-          let myAveragedLeftPinkyYPos = averageXPos(leftPinky.y, recentLeftYs)
-          let myAveragedRightPinkyYPos = averageXPos(leftPinky.y, recentRightYs)
-          pinkyDistance = 1000;// + leftPinky.score;
+
+    let myAveragedLeftPinkyXPos = averagePos(leftPinky.x, recentLeftXs);
+    let myAveragedLeftPinkyYPos = averagePos(leftPinky.y, recentLeftYs);
+
+    let myAveragedRightPinkyXPos = averagePos(rightPinky.x, recentRightXs);
+    let myAveragedRightPinkyYPos = averagePos(rightPinky.y, recentRightYs);
+
+    let myAveragedLeftEyeXPos = averagePos(leftEyeInner.x, recentLeftEyeXs);
+    let myAveragedLeftEyeYPos = averagePos(leftEyeInner.y, recentLeftEyeYs);
+
+    let myAveragedRightEyeXPos = averagePos(rightEyeInner.x, recentRightEyeXs);
+    let myAveragedRightEyeYPos = averagePos(rightEyeInner.y, recentRightEyeYs);
+
+    eyeDistance = dist(myAveragedLeftEyeXPos, myAveragedLeftEyeYPos, myAveragedRightEyeXPos, myAveragedRightEyeYPos);
+
+    push();
+    noFill();
+    strokeWeight(2);
+    ellipse(leftEyeInner.x, leftEyeInner.y, 10);
+    ellipse(rightEyeInner.x, rightEyeInner.y, 10);
+
+    fill("blue");
+    ellipse(myAveragedLeftEyeXPos, myAveragedLeftEyeYPos);
+    ellipse(myAveragedRightEyeXPos, myAveragedRightEyeYPos);
+    pop();
+
+    // displayData(leftPinky);
+    // displayData(rightPinky);
+
+    pinkyDistance = dist(myAveragedLeftPinkyXPos, myAveragedLeftPinkyYPos, myAveragedRightPinkyXPos, myAveragedLeftPinkyYPos);
+    if (leftPinky.score > .10 && rightPinky.score > .10) {
+
+      if (myAveragedLeftPinkyYPos >= myAveragedRightPinkyYPos + 150 || myAveragedLeftPinkyYPos <= myAveragedRightPinkyYPos - 150) {
+        console.log("pinky fingers are too far apart");
+        pinkyDistance = 1000;// + leftPinky.score;
+      } else {
+        pinkyDistance = dist(myAveragedLeftPinkyXPos, myAveragedLeftPinkyYPos, myAveragedRightPinkyXPos, myAveragedLeftPinkyYPos);
+      }
+    } else {
+      pinkyDistance = 2000; //+ leftPinky.score;
+      console.log("Not confident on pinky positions."); // Left: ", leftPinky.score, "Right: ", rightPinky.score);
+    }
+
+    if (pinkyDistance < eyeDistance * 1.75) {
+      if (weArePraying === false) {
+        activeHeadline = random(headlines);
+      }
+      for (headline of headlines) {
+        if (activeHeadline.headlineText === headline.headlineText) {
+          headline.active = true;
         } else {
-          let myAveragedLeftPinkyXPos = averageXPos(leftPinky.x, recentLeftXs);
-          let myAveragedRightPinkyXPos = averageXPos(rightPinky.x, recentRightXs);
-          pinkyDistance = dist(myAveragedLeftPinkyXPos, leftPinky.y, myAveragedRightPinkyXPos, leftPinky.y)
+          headline.active = false;
         }
-      } else {
-        pinkyDistance = 2000; //+ leftPinky.score;
-        // console.log("Not confident on pinky positions. Left: ", leftPinky.score, "Right: ", rightPinky.score);
       }
-
-      if (pinkyDistance < 60) {
-        if (weArePraying === false) {
-          activeHeadline = random(headlines);
-        }
-        for (headline of headlines) {
-          if (activeHeadline.headlineText === headline.headlineText) {
-            headline.active = true;
-          } else {
-            headline.active = false;
-          }
-        }
-        weArePraying = true;
-      } else {
-        weArePraying = false;
-      }
+      weArePraying = true;
+    } else {
+      weArePraying = false;
     }
 
 
@@ -105,6 +136,12 @@ function draw() {
       } else {
         text("NOT PRAYING", 10, 35);
       }
+
+      fill("white");
+      rect(0, 40, 100, 20);
+      fill("black");
+      text("eye dist:" + eyeDistance.toFixed(2), 10, 55);
+      pop();
     }
 
   }
@@ -130,7 +167,7 @@ function displayData(posePosition) {
   pop();
 }
 
-function averageXPos(x, myArray) {
+function averagePos(x, myArray) {
   //This is from https://javascript.plainenglish.io/simple-smoothing-for-posenet-keypoints-cd1bc57f5872
   if (myArray.length < 1) {
     for (let i = 0; i < numXs; i++) {
