@@ -120,29 +120,29 @@ function draw() {
     }
 
     //Display info
-    if (pinkyDistance != undefined) {
-      push();
-      textSize(12);
-      fill("white");
-      rect(0, 0, 100, 20);
-      fill("black");
-      text("dist:" + pinkyDistance.toFixed(2), 10, 15);
+    // if (pinkyDistance != undefined) {
+    //   push();
+    //   textSize(12);
+    //   fill("white");
+    //   rect(0, 0, 100, 20);
+    //   fill("black");
+    //   text("dist:" + pinkyDistance.toFixed(2), 10, 15);
 
-      fill("white");
-      rect(0, 20, 100, 20);
-      fill("black");
-      if (weArePraying) {
-        text("PRAYING", 10, 35);
-      } else {
-        text("NOT PRAYING", 10, 35);
-      }
+    //   fill("white");
+    //   rect(0, 20, 100, 20);
+    //   fill("black");
+    //   if (weArePraying) {
+    //     text("PRAYING", 10, 35);
+    //   } else {
+    //     text("NOT PRAYING", 10, 35);
+    //   }
 
-      fill("white");
-      rect(0, 40, 100, 20);
-      fill("black");
-      text("eye dist:" + eyeDistance.toFixed(2), 10, 55);
-      pop();
-    }
+    //   fill("white");
+    //   rect(0, 40, 100, 20);
+    //   fill("black");
+    //   text("eye dist:" + eyeDistance.toFixed(2), 10, 55);
+    //   pop();
+    // }
 
   }
 }

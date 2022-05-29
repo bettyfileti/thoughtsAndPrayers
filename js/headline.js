@@ -42,7 +42,7 @@ class Headline {
             rect(0, height - lowerThird, width, lowerThird);
 
             //eyebrow
-
+            noStroke();
             fill("white");
             rect(eyebrowBG.x, eyebrowBG.y, eyebrowBG.width, eyebrowBG.height);
             fill("#831811")

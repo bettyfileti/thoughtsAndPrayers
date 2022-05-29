@@ -2,7 +2,7 @@ html,
 body {
   height: 100%;
   margin: 0;
-  font-family: futura-pt-condensed, sans-serif;
+  font-family: futura-pt-bold, sans-serif;
 }
 
 .container {
@@ -23,6 +23,7 @@ body {
   z-index: -1;
   background-color: #1B4D92;
   height: 100vh;
+  width: 100vw;
 }
 
 #canvas-container {
@@ -39,21 +40,53 @@ body {
   overflow: hidden;
 }
 
-#scroll-text {
+.scroll-text{
   color: #2B77AF;
-  font-size: 160px;
+  font-size: 140px;
   white-space: nowrap;
-
+  padding-top: -10px;
+  padding-bottom: -10px;
+}
+#scroll-text-1 {
   /* animation properties */
   -moz-transform: translateX(100%);
   -webkit-transform: translateX(100%);
   transform: translateX(100%);
 
-  -moz-animation: my-animation 60s linear infinite;
-  -webkit-animation: my-animation 60s linear infinite;
-  animation: my-animation 60s linear infinite;
+  -moz-animation: my-animation 30s linear infinite;
+  -webkit-animation: my-animation 30s linear infinite;
+  animation: my-animation 30s linear infinite;
 }
+#scroll-text-2 {
+  /* animation properties */
+  -moz-transform: translateX(80%);
+  -webkit-transform: translateX(80%);
+  transform: translateX(80%);
 
+  -moz-animation: my-animation 20s linear infinite;
+  -webkit-animation: my-animation 20s linear infinite;
+  animation: my-animation 20s linear infinite;
+}
+#scroll-text-3 {
+  /* animation properties */
+  -moz-transform: translateX(40%);
+  -webkit-transform: translateX(40%);
+  transform: translateX(40%);
+
+  -moz-animation: my-animation 30s linear infinite;
+  -webkit-animation: my-animation 30s linear infinite;
+  animation: my-animation 30s linear infinite;
+}
+#scroll-text-4 {
+  /* animation properties */
+  -moz-transform: translateX(-60%);
+  -webkit-transform: translateX(-60%);
+  transform: translateX(-60%);
+
+  -moz-animation: my-animation 25s linear infinite;
+  -webkit-animation: my-animation 25s linear infinite;
+  animation: my-animation 25s linear infinite;
+}
 /* for Firefox */
 @-moz-keyframes my-animation {
   from {
