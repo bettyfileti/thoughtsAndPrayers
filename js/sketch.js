@@ -26,8 +26,9 @@ let doingCount = 0;
 let whatCanWeDo = [
   "How could this happen? Please pray for change.",
   "Not any better? Pray again.",
+  "Please keep praying. We are so close.",
   "Pray harder.",
-  "Please keep praying. We are so close."
+  "Please, more prayer."
 ]
 let headlineSpeed = 50;
 
@@ -132,13 +133,8 @@ function draw() {
       }
     }
 
-    let frameCountSpeed = headlineSpeed/(doingCount + 1)//higher number here makes speed slower
-    if (frameCountSpeed <= 5){
-      frameCountSpeed = 5;
-      console.log("here");
-    } else {
-      frameCountSpeed = frameCountSpeed;
-    }
+    let frameCountSpeed = 10 * (whatCanWeDo.length - doingCount) //higher number here makes speed slower
+    console.log(frameCountSpeed);
     if (weArePraying && frameCount % frameCountSpeed === 0) { 
       activateRandomHeadline();
     }
