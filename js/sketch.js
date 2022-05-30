@@ -134,7 +134,7 @@ function draw() {
     }
 
     let frameCountSpeed = 10 * (whatCanWeDo.length - doingCount) //higher number here makes speed slower
-    console.log(frameCountSpeed);
+    // console.log(frameCountSpeed);
     if (weArePraying && frameCount % frameCountSpeed === 0) { 
       activateRandomHeadline();
     }
