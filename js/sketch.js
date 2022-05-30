@@ -14,12 +14,22 @@ let recentRightEyeXs = [];
 let recentRightEyeYs = [];
 let numXs = 5; //this is the number of frames to average
 
+
 let weArePraying = false;
 let headlines = [];
 let futura = "futura-pt-bold";
 let futuraCondensed = "futura-pt-condensed";
 let helvetica = "helvetica";
 let activeHeadline;
+
+let doingCount = 0;
+let whatCanWeDo = [
+  "How could this happen? Please pray for change.",
+  "Not any better? Pray again.",
+  "Heartbreaking. Go ahead, pray.",
+  "Keep praying. It will change things."
+]
+let headlineSpeed = 50;
 
 function setup() {
   let cnv = createCanvas(640, 480);
@@ -103,6 +113,13 @@ function draw() {
           headline.active = false;
         }
       }
+      if (!weArePraying){
+        doingCount++;
+        if (doingCount > whatCanWeDo.length-1){
+          doingCount = 0;
+        }
+
+      }
       weArePraying = true;
     } else {
       weArePraying = false;
@@ -115,8 +132,26 @@ function draw() {
       }
     }
 
-    if (weArePraying && frameCount % 60 === 0) { //higher number here makes speed slower
+    let frameCountSpeed = headlineSpeed/(doingCount + 1)//higher number here makes speed slower
+    if (frameCountSpeed <= 5){
+      frameCountSpeed = 5;
+      console.log("here");
+    } else {
+      frameCountSpeed = frameCountSpeed;
+    }
+    if (weArePraying && frameCount % frameCountSpeed === 0) { 
       activateRandomHeadline();
+    }
+
+
+    if (!weArePraying){
+      push();
+      fill("white");
+      textFont(futura);
+      textSize(20);
+      textAlign(CENTER);
+      text(whatCanWeDo[doingCount], width/2, 40);
+      pop();
     }
 
     //Display info
