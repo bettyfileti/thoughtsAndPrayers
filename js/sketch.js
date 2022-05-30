@@ -26,8 +26,8 @@ let doingCount = 0;
 let whatCanWeDo = [
   "How could this happen? Please pray for change.",
   "Not any better? Pray again.",
-  "Heartbreaking. Go ahead, pray.",
-  "Keep praying. It will change things."
+  "Pray harder.",
+  "Please keep praying. We are so close."
 ]
 let headlineSpeed = 50;
 
